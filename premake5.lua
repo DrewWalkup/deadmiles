@@ -7,6 +7,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
    include "vendor/glfw"
+   include "vendor/glad"
 group ""
 
 project "deadmiles"
@@ -18,11 +19,13 @@ project "deadmiles"
    files { "src/**.h", "src/**.cpp" }
 
    includedirs {
-      "vendor/glfw/include"
+      "vendor/glfw/include",
+      "vendor/glad/include"
    }
 
    links {
-      "GLFW"
+      "GLFW",
+      "GLAD"
    }
 
    filter "system:windows"
