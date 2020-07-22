@@ -7,8 +7,11 @@ project "GLAD"
 
 	files {
 		"include/**.h",
-		"include/**.h",
 		"src/**.c"
+	}
+
+	includedirs {
+		"include"
 	}
 
 	filter "system:windows"
