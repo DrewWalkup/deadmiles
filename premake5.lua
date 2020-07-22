@@ -1,11 +1,13 @@
 -- premake5.lua
 workspace "deadmiles"
    configurations { "Debug", "Release" }
+   startproject "deadmiles"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
    include "vendor/glfw"
+group ""
 
 project "deadmiles"
    kind "ConsoleApp"
@@ -19,15 +21,19 @@ project "deadmiles"
       "vendor/glfw/include"
    }
 
+   links {
+      "GLFW"
+   }
+
    filter "system:windows"
+      systemversion "latest"
+      
       links {
-         "GLFW",
          "OpenGL32"
       }
 
    filter "system:macosx"
       links {
-         "GLFW",
          "Cocoa.framework",
          "OpenGL.framework",
          "IOKit.framework",
