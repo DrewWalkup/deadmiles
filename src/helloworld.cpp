@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include <GLAD/glad.h>
 
 int main()
 {
@@ -20,7 +20,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // for Mac initialization
 
 	/* Create a windowed mode window and its OpenGL context */
-	GLFWwindow* window = glfwCreateWindow(1900, 1000, "Dead Miles", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "Dead Miles", NULL, NULL);
 	if (!window)
 	{
 		std::cerr << "Failed to create GLFW window" << std::endl;
@@ -32,17 +32,24 @@ int main()
 	glfwMakeContextCurrent(window);
 
 	/* Initialize GLAD */
-	
+	if (!gladLoadGL())
+	{
+		std::cerr << "Failed to initialize GLAD" << std::endl;
+		return -1;
+	}
+
+	/* Initialize Viewport */
+	glViewport(0, 0, 1280, 720);
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
-		/* Render here */
+		/* Render Here */
 
-		/* opengl code */
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		/* OpenGL Code */
+		glClearColor(3.0f/255.0f, 223.0f/255.0f, 252.0f/255.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
@@ -52,4 +59,5 @@ int main()
 	}
 
 	glfwTerminate();
+	return 0;
 }
