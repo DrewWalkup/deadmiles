@@ -1,24 +1,38 @@
 #include <iostream>
-#include "GLFW/glfw3.h"
 
-int main ()
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
+int main()
 {
-    GLFWwindow* window;
-
-	/* Initialize the library */
+	/* Initialize GLFW */
 	if (!glfwInit())
+	{
+		std::cerr << "Failed to initialize GLFW" << std::endl;
 		return -1;
+	}
+
+	/* GLFW Window Options */
+	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4); // OpenGL 4.6
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // hardCORE
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // for Mac initialization
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1900, 1000, "Dead Miles", NULL, NULL);
 	if (!window)
 	{
+		std::cerr << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		return -1;
 	}
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
+
+	/* Initialize GLAD */
+	
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -28,16 +42,6 @@ int main ()
 		/* opengl code */
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
-
-		glBegin(GL_TRIANGLES);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex2f(-0.5f, -0.5f);
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex2f( 0.5f, -0.5f);
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex2f( 0.0f,  0.5f);
-		glEnd();
 		
 
 		/* Swap front and back buffers */
