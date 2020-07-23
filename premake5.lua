@@ -28,6 +28,10 @@ project "deadmiles"
       "GLAD"
    }
 
+	defines {
+		"GLFW_INCLUDE_NONE"
+	}
+
    filter "system:windows"
       systemversion "latest"
       
